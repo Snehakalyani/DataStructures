@@ -12,7 +12,7 @@ int *blah(int val)
 int main()
 {
     int *b;
-    int *b = blah(5);
+    *b = blah(5);
     printf("%d", *b);
     return 0;
 }
