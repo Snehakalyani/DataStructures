@@ -2,9 +2,15 @@
 #include<stdlib.h>
 int main()
 {
+
+struct node
+{
+int val;
 struct node* turtle;
 struct node* rabbit;
-head = NULL;
+};  
+
+struct node* head = NULL;
 turtle = rabbit = head;
 
 while (rabbit)
