@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 
 struct treenode{
     int data;               //value of the node
@@ -12,9 +13,9 @@ void insertnode()
 { 
     //CREATING A NODE
     int d;
-    struct treenode* temp, parent; //creating a temporary node which holds the data d
-    temp = (struct treenode*)malloc(sizeof (struct treenode)); //allocating mem for temp
-                                                               //it points to this certain address now
+    struct treenode* temp, *parent; //creating a temporary node which holds the data d
+    temp = (struct treenode*)malloc(sizeof(struct treenode)); //allocating mem for temp
+                                                              //it points to this certain address now, basically points to the node
 
     temp->data = d;                
     temp->left = NULL;              
@@ -33,14 +34,14 @@ void insertnode()
         current = root;           //current points to the root now
         while(current)
         {
-            parent = current      //parent gets updated as current is updated
+            parent = current;     //parent gets updated as current is updated
             if(temp-> data > parent -> data)  //if given data greater than parent data
             {
-                current ->current->right;     //goes to right child node
+                current = current->right;     //goes to right child node
             }
             else
             {
-                current ->current->left;      //goes to left child node
+                current = current->left;      //goes to left child node
             }
             //current points to null now
             //found the parent node where the new node is to be inserted

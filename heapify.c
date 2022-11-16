@@ -10,18 +10,28 @@ int main()
 
 }
 
-
+void heapsort(int arr[], int n);
 void createheap(int arr[], int n);
 void heapify(int arr[], int n, int i);
 void swap(int *a, int *b);
 
 //swap function
-void swap(int *a, int *b) {
+void swap(int *a, int *b)
+{
   int t = *a;
   *a = *b;
   *b = t;
 }
 
+void heapsort(int arr[], int n)
+{
+    createheap(arr, n);
+    for(int i = n; i>1; i --)
+    {
+        swap(n, 1);
+        heapify(arr, i -1, 1);
+    }
+}
 void createheap(int arr[], int n)
 {
     for(int i = n/2; i > 0; i--)
@@ -46,7 +56,7 @@ void createheap(int arr[], int n)
 
     if(parent!= i)
     {
-        swap(arr[parent], arr[i]);
+        swap(parent, i);
         heapify(arr, n, parent);
     }
  }

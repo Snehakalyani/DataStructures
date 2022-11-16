@@ -24,16 +24,16 @@ int i = lower - 1; //i points to just before the array, and further used to keep
     //loop to traverse to the array and compare pivot with rest of elements
     for (int j = lower; j < upper; j++) //j is pointing to the first element of the array
     {
-        if (arr[j] <= pivot)             //if a element is less than or equal to pivot 
+        if (arr[j] <= pivot)            //if a element is less than or equal to pivot 
         {                    
-        i++;                           //the next element is the greater element now
-        swap(&arr[i], &arr[j]);        // swap it with the greater element pointed by i
+        i++;                            //the next element is the greater element now
+        swap(&arr[i], &arr[j]);         // swap it with the greater element pointed by i
         }
     }
 
 
 swap(&arr[i + 1], &arr[upper]); // swap the pivot element with the greater element at i
-return (i + 1); //returning the partition index
+return (i + 1);                 //returning the partition index
 }
 
 
