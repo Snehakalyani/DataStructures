@@ -22,6 +22,19 @@ void push(int x)
     top = temp;
 }
 
+ int pop(struct stacknode* temp)
+{
+    if  (top == NULL)   {printf("stack underflow");}
+    else
+    {
+        struct stacknode* temp =  top;
+        int x = top->val;
+        top = top->next;
+        free(temp);
+        return x;
+    }
+}
+
 
 
 void printstack()
@@ -41,6 +54,7 @@ void printstack()
 }
 int main() 
 {
+    struct stacknode* head = NULL;
     int x, i, n;
     printf("Enter number of elements in stack: ");
     scanf("%d", &n);
@@ -50,6 +64,7 @@ int main()
         scanf("%d", &x);
         push(x);
     }
+    pop(head);
     printstack();
     return 0;
 }
