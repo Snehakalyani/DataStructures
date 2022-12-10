@@ -10,8 +10,8 @@ struct queuenode
 struct queuenode* front = NULL;
 struct queuenode* rear = NULL;
 
-void enqueue(int x); //function to insert element in the queue
-void dequeue(struct queuenode* front); //function to delete element from the queue
+void enqueue(int x);                    //function to insert element in the queue
+void dequeue(struct queuenode* front);  //function to delete element from the queue
 
 void enqueue(int x)
 {
@@ -28,7 +28,17 @@ void enqueue(int x)
 
 }
 
-
+void dequeue(struct queuenode* temp) 
+{
+    if (front == NULL) {
+        printf("No queue byee");
+        return;
+    } else {
+        temp = front;
+        front = front -> next;
+        free(temp);
+    }
+}
 
 void printqueue()
 {
@@ -46,9 +56,10 @@ void printqueue()
     }
 }
 
-
+ 
 int main() 
 {
+    struct queuenode *head = NULL;
     int x, i, n;
     printf("Enter number of elements in queue: ");
     scanf("%d", &n);
@@ -58,6 +69,7 @@ int main()
         scanf("%d", &x);
         enqueue(x);
     }
+    dequeue(head);
     printqueue();
     return 0;
 }
