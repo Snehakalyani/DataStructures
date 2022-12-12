@@ -2,63 +2,82 @@
 #include<stdlib.h>
 
 struct treenode{
-    int data;               //value of the node
-    struct treenode* left;  //pointer to the left child
-    struct treenode* right; //pointer to the right child
+    int data;                 //value of the node
+    struct treenode* left;    //pointer to the left child
+    struct treenode* right;   //pointer to the right child
 };
 
 struct treenode* root = NULL; //initializing a root pointer which points to nothing
 
-void insertnode()
-{ 
-    //CREATING A NODE
-    int d;
-    struct treenode* temp, *parent; //creating a temporary node which holds the data d
-    temp = (struct treenode*)malloc(sizeof(struct treenode)); //allocating mem for temp
+// Function to create a new node with the given data
+struct treenode* createNode(int data)
+{
+   struct treenode* temp = (struct treenode*)malloc(sizeof(struct treenode)); //allocating mem for temp
                                                               //it points to this certain address now, basically points to the node
 
-    temp->data = d;                
+    temp->data = data;                
     temp->left = NULL;              
     temp->right = NULL;
-    parent = root;     //first parent of the tree is the root
-
-    if(root == NULL)   //the root points to nothing right now
-    {
-        root = temp;   //as the root is empty, the tree is empty, so we just give insert temp into root
-    }                  
-    //now if the root is not empty, a tree exists
-    //so we should travserse and find the right location to insert the node we created i.e temp node
-    else
-    {
-        struct treenode *current; //pointer to traverse the tree
-        current = root;           //current points to the root now
-        while(current)
-        {
-            parent = current;     //parent gets updated as current is updated
-            if(temp-> data > parent -> data)  //if given data greater than parent data
-            {
-                current = current->right;     //goes to right child node
-            }
-            else
-            {
-                current = current->left;      //goes to left child node
-            }
-            //current points to null now
-            //found the parent node where the new node is to be inserted
-            //should find where to insert
-            //left or right
-            if(temp->data > parent->data)
-            {
-                parent->right = temp;
-            }
-            else
-            {
-                parent->left = temp;
-            }
-
-            
-        }
-
-    }
-    
+    return temp;
 }
+void insertnode(struct treenode* root, int data)
+{
+    if (data < root->data) // if data is less than the current node's data
+    {
+        if (root->left == NULL) // if the left subtree is empty
+        {
+            root->left = createNode(data); // create a new node and insert the data
+        }
+        else // if the left subtree is not empty
+        {
+            insertnode(root->left, data); // recursively insert the data in the left subtree
+        }
+    }
+    else if (data > root->data) // if data is greater than the current node's data
+    {
+        if (root->right == NULL) // if the right subtree is empty
+        {
+            root->right = createNode(data); // create a new node and insert the data
+        }
+        else // if the right subtree is not empty
+        {
+            insertnode(root->right, data); // recursively insert the data in the right subtree
+        }
+    }
+}
+
+// Function to perform in-order traversal of the BST
+void inorder(struct treenode *root)
+{
+    if (root == NULL) return; // if the tree is empty, return
+    inorder(root->left); // traverse the left subtree
+    printf("%d ", root->data); // visit the root node
+    inorder(root->right); // traverse the right subtree
+}
+
+
+int main()
+{
+    int n, i, data;
+    // create the root node
+   struct treenode *root = createNode(10);
+
+    // prompt the user to insert data into the BST
+    printf("Enter the number of elements you want to insert: ");
+    scanf("%d", &n);
+    for(i = 1; i<=n; i++)
+    {
+        printf("Enter data:");
+        scanf("%d", &data);
+        insertnode(root, data);
+    }
+    // traverse the BST in-order
+    printf("In-order traversal of the BST: ");
+    inorder(root);
+    printf("\n");
+    return 0;
+}
+
+
+
+
